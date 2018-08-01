@@ -24,7 +24,7 @@ namespace ContactsManager
         static void AffichageMenu()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Menu\n1. Liste des Contacts\n2. Ajout des contacts\n3. Suppresion d'un contact\n4. Quitter\nTapez votre choix, puis validez avec entrer:");
+            Console.WriteLine("Menu\n 1- Liste des Contacts\n 2- Ajout des contacts\n 3- Suppresion d'un contact\n 4- Quitter\nTapez votre choix, puis validez avec entrer:");
         }
         
         static void ChoixMenu(string Choix,List<string> ListContact)
@@ -48,6 +48,7 @@ namespace ContactsManager
                     break;
                 default:
                     Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Mauvais choix");
                     break;
             }
