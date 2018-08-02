@@ -12,14 +12,13 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
-            List<string> contact = new List<string>();
+            List<Contact> contact = new List<Contact>();
             string Choix;
             do
             {
                 AffichageMenu();
                 Choix = Console.ReadLine();
-                ChoixMenu(Choix,contact);
-                
+                ChoixMenu(Choix,contact);          
             } while(Choix!="4");
         }
         static void AffichageMenu()
@@ -27,7 +26,7 @@ namespace ContactsManager
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Quitter\n\nTapez votre choix, puis validez avec entrer:");
         }
-        static void ChoixMenu(string Choix,List<string> ListContact)
+        static void ChoixMenu(string Choix,List<Contact> ListContact)
         {
             switch (Choix)
             {
@@ -54,29 +53,41 @@ namespace ContactsManager
             }
         }
 
-        static void AjouterContact(List<string> ListContact)
+        static void AjouterContact(List<Contact> ListContact)
         {
             Console.Clear();
-            Console.WriteLine("Rentrez le nom du contact à ajouter");
-            ListContact.Add(Console.ReadLine());
+            string prenom, nom;
+            int num;
+            nom = PosezQuestion("Rentrez le nom du contact à ajouter");
+            prenom = PosezQuestion("Rentrez le nom du contact à ajouter");
+            num = SaisirInt("Rentrez le numéro du contact à ajouter");
+            ListContact.Add(new Contact(nom,prenom,num));
             Console.Clear();
         }
-        static void ListerContacts(List<string> ListContact)
+        static void ListerContacts(List<Contact> ListContact)
         {
             Console.Clear();
-            foreach (String LeContact in ListContact)
+            foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine(LeContact);
+                Console.WriteLine("Nom: "+LeContact.GetName()+"\nPrenom: "+LeContact.GetFirstName()+"\nNumero: "+LeContact.GetNum());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
             Console.Clear();
         }
-        static void SupprimerContact(List<string> ListContact)
+        static void SupprimerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            Console.WriteLine("Rentrez le nom du contact à supprimer");
-            ListContact.Remove((Console.ReadLine()));
+            int g = SaisirInt("Rentrez le numéro du contact à supprimer");
+            foreach(Contact leContact in ListContact)
+            {
+                if (g == leContact.GetNum())
+                {
+                    ListContact.Remove(leContact);
+                    break;
+                }
+            }
+            
             Console.Clear();
         }
 
@@ -109,7 +120,7 @@ namespace ContactsManager
 
         static int SaisirInt(string entier)
         {
-            return int.Parse(PosezQuestion("Veuillez saisir un entier : "));
+            return int.Parse(PosezQuestion(entier));
         }
         static double SaisirDouble(string dooble)
         {
@@ -126,6 +137,33 @@ namespace ContactsManager
         static decimal SaisirDécimal(string entier)
         {
             return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
+        }
+        
+        class Contact
+        {
+            string nom;
+            string prenom;
+            int num;
+
+            public Contact(string leNom,string lePrenom,int leNum)
+            {
+                nom = leNom;
+                prenom = lePrenom;
+                num = leNum;
+            }
+
+            public string GetName()
+            {
+                return nom;
+            }
+            public string GetFirstName()
+            {
+                return prenom;
+            }
+            public int GetNum()
+            {
+                return num;
+            }
         }
     }
 }
