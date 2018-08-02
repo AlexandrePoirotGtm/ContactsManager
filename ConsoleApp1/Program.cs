@@ -16,15 +16,16 @@ namespace Contacto
     public class Contact
     {
         private string nom;
+        //public string Nom{ get;private set;}
         private string prenom;
-        private int num;
+        private int Num;
         private DateTime date;
 
         public Contact(string leNom, string lePrenom, int leNum)
         {
             nom = leNom;
             prenom = lePrenom;
-            num = leNum;
+            Num = leNum;
             date = DateTime.Now;
         }
 
@@ -34,8 +35,8 @@ namespace Contacto
         }
         public string Nom
         {
-            get {return nom;}
-            private set {nom = value;}
+            get { return nom; }
+            private set { nom = value; }
         }
         public string Prenom
         {
@@ -44,8 +45,8 @@ namespace Contacto
         }      
         public int Numéro
         {
-            get { return num; }
-            private set { num = value; }
+            get { return Num; }
+            private set { Num = value; }
         }
     }
 }
