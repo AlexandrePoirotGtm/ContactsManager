@@ -8,10 +8,11 @@ namespace ContactsManager
 {
     class Program
     {
-        static List<string> contact = new List<string>();
+        
 
         static void Main(string[] args)
         {
+            List<string> contact = new List<string>();
             string Choix;
             do
             {
@@ -50,6 +51,10 @@ namespace ContactsManager
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Mauvais choix");
+                    if('a'>'b')
+                        {
+                        Console.WriteLine("prout");
+                    }
                     break;
             }
         }
@@ -60,11 +65,10 @@ namespace ContactsManager
             ListContact.Add(Console.ReadLine());
             Console.Clear();
         }
-
         static void ListerContacts(List<string> ListContact)
         {
             Console.Clear();
-            foreach (String LeContact in contact)
+            foreach (String LeContact in ListContact)
             {
                 Console.WriteLine(LeContact);
                 Console.WriteLine("\n");
@@ -80,5 +84,25 @@ namespace ContactsManager
             Console.Clear();
         }
 
+        static int RentrezInt(string entier)
+        {
+            return(int.Parse(entier));
+        }
+        static double RentrezDouble(string dooble)
+        {
+            return (double.Parse(dooble));
+        }
+        static decimal RentrezDecimal(string DeciMal)
+        {
+            return (decimal.Parse(DeciMal));
+        }
+        static bool RentrezBool(string bobol)
+        {
+            return(bool.Parse(bobol));
+        }
+        static DateTime RentrezDate(string date)
+        {
+            return (DateTime.Parse(date));
+        }
     }
 }
