@@ -25,9 +25,8 @@ namespace ContactsManager
         static void AffichageMenu()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Menu\n 1- Liste des Contacts\n 2- Ajout des contacts\n 3- Suppresion d'un contact\n 4- Quitter\nTapez votre choix, puis validez avec entrer:");
+            Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Quitter\n\nTapez votre choix, puis validez avec entrer:");
         }
-        
         static void ChoixMenu(string Choix,List<string> ListContact)
         {
             switch (Choix)
@@ -54,6 +53,7 @@ namespace ContactsManager
                     break;
             }
         }
+
         static void AjouterContact(List<string> ListContact)
         {
             Console.Clear();
@@ -79,6 +79,7 @@ namespace ContactsManager
             ListContact.Remove((Console.ReadLine()));
             Console.Clear();
         }
+
         static int RentrezInt(string entier)
         {
             return(int.Parse(entier));
@@ -99,11 +100,13 @@ namespace ContactsManager
         {
             return (DateTime.Parse(date));
         }
+
         static string PosezQuestion(string question)
         {
             Console.WriteLine(question);
             return(Console.ReadLine());
         }
+
         static int SaisirInt(string entier)
         {
             return int.Parse(PosezQuestion("Veuillez saisir un entier : "));
