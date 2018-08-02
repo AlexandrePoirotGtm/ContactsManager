@@ -28,22 +28,24 @@ namespace Contacto
             date = DateTime.Now;
         }
 
-        public string GetName()
-        {
-            return nom;
-        }
-        public string GetFirstName()
-        {
-            return prenom;
-        }
-        public int GetNum()
-        {
-            return num;
-        }
-
         public DateTime GetDate()
         {
             return date;
+        }
+        public string Nom
+        {
+            get {return nom;}
+            private set {nom = value;}
+        }
+        public string Prenom
+        {
+            get { return prenom; }
+            private set { prenom = value; }
+        }      
+        public int Numéro
+        {
+            get { return num; }
+            private set { num = value; }
         }
     }
 }

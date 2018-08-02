@@ -70,7 +70,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Prenom: "+LeContact.GetFirstName()+ "\nNom: " + LeContact.GetName() + "\nNumero: " +LeContact.GetNum()+"\nDate d'ajout: "+ LeContact.GetDate());
+                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nDate d'ajout: "+ LeContact.GetDate());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
@@ -82,7 +82,7 @@ namespace ContactsManager
             int g = SaisirInt("Rentrez le numéro du contact à supprimer");
             foreach(Contact leContact in ListContact)
             {
-                if (g == leContact.GetNum())
+                if (g == leContact.Numéro)
                 {
                     ListContact.Remove(leContact);
                     break;
