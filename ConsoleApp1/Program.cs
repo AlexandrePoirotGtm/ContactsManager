@@ -15,10 +15,10 @@ namespace Contacto
 
     public class Contact
     {
-        string nom;
-        string prenom;
-        int num;
-        DateTime date;
+        private string nom;
+        private string prenom;
+        private int num;
+        private DateTime date;
 
         public Contact(string leNom, string lePrenom, int leNum)
         {
