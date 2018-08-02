@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Contacto;
 namespace ContactsManager
 {
     class Program
@@ -59,7 +60,7 @@ namespace ContactsManager
             string prenom, nom;
             int num;
             nom = PosezQuestion("Rentrez le nom du contact à ajouter");
-            prenom = PosezQuestion("Rentrez le nom du contact à ajouter");
+            prenom = PosezQuestion("Rentrez le prénom du contact à ajouter");
             num = SaisirInt("Rentrez le numéro du contact à ajouter");
             ListContact.Add(new Contact(nom,prenom,num));
             Console.Clear();
@@ -69,7 +70,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Nom: "+LeContact.GetName()+"\nPrenom: "+LeContact.GetFirstName()+"\nNumero: "+LeContact.GetNum());
+                Console.WriteLine("Nom: "+LeContact.GetName()+"\nPrenom: "+LeContact.GetFirstName()+"\nNumero: "+LeContact.GetNum()+"\nDate d'ajout: "+ LeContact.GetDate());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
@@ -124,46 +125,21 @@ namespace ContactsManager
         }
         static double SaisirDouble(string dooble)
         {
-            return double.Parse(PosezQuestion("Veuillez saisir un double : "));
+            return double.Parse(PosezQuestion(dooble));
         }
         static bool Saisirbool(string bobol)
         {
-            return bool.Parse(PosezQuestion("Veuillez saisir un bool : "));
+            return bool.Parse(PosezQuestion(bobol));
         }
         static DateTime SaisirDate(string date)
         {
-            return DateTime.Parse(PosezQuestion("Veuillez saisir une Date : "));
+            return DateTime.Parse(PosezQuestion(date));
         }
         static decimal SaisirDécimal(string entier)
         {
             return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
         }
         
-        class Contact
-        {
-            string nom;
-            string prenom;
-            int num;
-
-            public Contact(string leNom,string lePrenom,int leNum)
-            {
-                nom = leNom;
-                prenom = lePrenom;
-                num = leNum;
-            }
-
-            public string GetName()
-            {
-                return nom;
-            }
-            public string GetFirstName()
-            {
-                return prenom;
-            }
-            public int GetNum()
-            {
-                return num;
-            }
-        }
+        
     }
 }
