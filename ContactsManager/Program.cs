@@ -59,8 +59,8 @@ namespace ContactsManager
             Console.Clear();
             string prenom, nom;
             int num;
-            nom = PosezQuestion("Rentrez le nom du contact à ajouter");
             prenom = PosezQuestion("Rentrez le prénom du contact à ajouter");
+            nom = PosezQuestion("Rentrez le nom du contact à ajouter");
             num = SaisirInt("Rentrez le numéro du contact à ajouter");
             ListContact.Add(new Contact(nom,prenom,num));
             Console.Clear();
@@ -70,7 +70,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Nom: "+LeContact.GetName()+"\nPrenom: "+LeContact.GetFirstName()+"\nNumero: "+LeContact.GetNum()+"\nDate d'ajout: "+ LeContact.GetDate());
+                Console.WriteLine("Prenom: "+LeContact.GetFirstName()+ "\nNom: " + LeContact.GetName() + "\nNumero: " +LeContact.GetNum()+"\nDate d'ajout: "+ LeContact.GetDate());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
