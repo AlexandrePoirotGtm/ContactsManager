@@ -99,5 +99,30 @@ namespace ContactsManager
         {
             return (DateTime.Parse(date));
         }
+        static string PosezQuestion(string question)
+        {
+            Console.WriteLine(question);
+            return(Console.ReadLine());
+        }
+        static int SaisirInt(string entier)
+        {
+            return int.Parse(PosezQuestion("Veuillez saisir un entier : "));
+        }
+        static double SaisirDouble(string dooble)
+        {
+            return double.Parse(PosezQuestion("Veuillez saisir un double : "));
+        }
+        static bool Saisirbool(string bobol)
+        {
+            return bool.Parse(PosezQuestion("Veuillez saisir un bool : "));
+        }
+        static DateTime SaisirDate(string date)
+        {
+            return DateTime.Parse(PosezQuestion("Veuillez saisir une Date : "));
+        }
+        static decimal SaisirDécimal(string entier)
+        {
+            return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
+        }
     }
 }
