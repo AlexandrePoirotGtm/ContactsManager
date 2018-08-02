@@ -51,10 +51,6 @@ namespace ContactsManager
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Mauvais choix");
-                    if('a'>'b')
-                        {
-                        Console.WriteLine("prout");
-                    }
                     break;
             }
         }
@@ -83,7 +79,6 @@ namespace ContactsManager
             ListContact.Remove((Console.ReadLine()));
             Console.Clear();
         }
-
         static int RentrezInt(string entier)
         {
             return(int.Parse(entier));
