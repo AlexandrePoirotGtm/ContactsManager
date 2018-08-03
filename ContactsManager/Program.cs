@@ -57,12 +57,15 @@ namespace ContactsManager
         static void AjouterContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string prenom, nom;
+            string prenom, nom, email;
             int num;
+            DateTime date;
             prenom = PosezQuestion("Rentrez le prénom du contact à ajouter");
             nom = PosezQuestion("Rentrez le nom du contact à ajouter");
             num = SaisirInt("Rentrez le numéro du contact à ajouter");
-            ListContact.Add(new Contact(nom,prenom,num));
+            email = PosezQuestion("Rentrez l'émail du contact à ajouter");
+            date = SaisirDate("Rentrez la date de naissance du contact à ajouter");
+            ListContact.Add(new Contact(nom,prenom,num,date,email));
             Console.Clear();
         }
         static void ListerContacts(List<Contact> ListContact)
@@ -70,7 +73,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nDate d'ajout: "+ LeContact.GetDate());
+                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.GetDate());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();

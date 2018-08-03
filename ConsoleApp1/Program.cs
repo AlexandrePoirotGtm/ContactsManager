@@ -19,14 +19,16 @@ namespace Contacto
         //public string Nom{ get;private set;}
         private string prenom;
         private int Num;
+        public string Email { get; set; }
         private DateTime date;
 
-        public Contact(string leNom, string lePrenom, int leNum)
+        public Contact(string leNom, string lePrenom, int leNum,DateTime date,string Email)
         {
             nom = leNom;
             prenom = lePrenom;
             Num = leNum;
-            date = DateTime.Now;
+            this.Email = Email;
+            this.date = date;
         }
 
         public DateTime GetDate()
