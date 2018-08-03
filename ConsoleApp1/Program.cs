@@ -18,7 +18,7 @@ namespace Contacto
         private string nom;
         //public string Nom{ get;private set;}
         private string prenom;
-        private int Num;
+        private int num;
         public string Email { get; set; }
         private DateTime date;
 
@@ -26,7 +26,7 @@ namespace Contacto
         {
             nom = leNom;
             prenom = lePrenom;
-            Num = leNum;
+            num = leNum;
             this.Email = Email;
             this.date = date;
         }
@@ -47,8 +47,8 @@ namespace Contacto
         }      
         public int Numéro
         {
-            get { return Num; }
-            private set { Num = value; }
+            get { return num; }
+            private set { num = value; }
         }
     }
 }
