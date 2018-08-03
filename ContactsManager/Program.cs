@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Contacto;
 namespace ContactsManager
 {
     class Program
@@ -12,14 +13,13 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
-            List<string> contact = new List<string>();
+            List<Contact> contact = new List<Contact>();
             string Choix;
             do
             {
                 AffichageMenu();
                 Choix = Console.ReadLine();
-                ChoixMenu(Choix,contact);
-                
+                ChoixMenu(Choix,contact);          
             } while(Choix!="4");
         }
         static void AffichageMenu()
@@ -27,7 +27,7 @@ namespace ContactsManager
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Quitter\n\nTapez votre choix, puis validez avec entrer:");
         }
-        static void ChoixMenu(string Choix,List<string> ListContact)
+        static void ChoixMenu(string Choix,List<Contact> ListContact)
         {
             switch (Choix)
             {
@@ -54,29 +54,44 @@ namespace ContactsManager
             }
         }
 
-        static void AjouterContact(List<string> ListContact)
+        static void AjouterContact(List<Contact> ListContact)
         {
             Console.Clear();
-            Console.WriteLine("Rentrez le nom du contact à ajouter");
-            ListContact.Add(Console.ReadLine());
+            string prenom, nom, email;
+            int num;
+            DateTime date;
+            prenom = PosezQuestion("Rentrez le prénom du contact à ajouter");
+            nom = PosezQuestion("Rentrez le nom du contact à ajouter");
+            num = SaisirInt("Rentrez le numéro du contact à ajouter");
+            email = PosezQuestion("Rentrez l'émail du contact à ajouter");
+            date = SaisirDate("Rentrez la date de naissance du contact à ajouter");
+            ListContact.Add(new Contact(nom,prenom,num,date,email));
             Console.Clear();
         }
-        static void ListerContacts(List<string> ListContact)
+        static void ListerContacts(List<Contact> ListContact)
         {
             Console.Clear();
-            foreach (String LeContact in ListContact)
+            foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine(LeContact);
+                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.GetDate());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
             Console.Clear();
         }
-        static void SupprimerContact(List<string> ListContact)
+        static void SupprimerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            Console.WriteLine("Rentrez le nom du contact à supprimer");
-            ListContact.Remove((Console.ReadLine()));
+            int g = SaisirInt("Rentrez le numéro du contact à supprimer");
+            foreach(Contact leContact in ListContact)
+            {
+                if (g == leContact.Numéro)
+                {
+                    ListContact.Remove(leContact);
+                    break;
+                }
+            }
+            
             Console.Clear();
         }
 
@@ -109,23 +124,25 @@ namespace ContactsManager
 
         static int SaisirInt(string entier)
         {
-            return int.Parse(PosezQuestion("Veuillez saisir un entier : "));
+            return int.Parse(PosezQuestion(entier));
         }
         static double SaisirDouble(string dooble)
         {
-            return double.Parse(PosezQuestion("Veuillez saisir un double : "));
+            return double.Parse(PosezQuestion(dooble));
         }
         static bool Saisirbool(string bobol)
         {
-            return bool.Parse(PosezQuestion("Veuillez saisir un bool : "));
+            return bool.Parse(PosezQuestion(bobol));
         }
         static DateTime SaisirDate(string date)
         {
-            return DateTime.Parse(PosezQuestion("Veuillez saisir une Date : "));
+            return DateTime.Parse(PosezQuestion(date));
         }
         static decimal SaisirDécimal(string entier)
         {
             return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
         }
+        
+        
     }
 }
