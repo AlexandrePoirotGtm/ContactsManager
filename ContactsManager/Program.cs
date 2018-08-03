@@ -73,7 +73,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.GetDate());
+                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.GetDate().ToShortDateString());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
