@@ -41,6 +41,18 @@ namespace ContactsManager
             trying = DateTime.TryParse(PosezQuestion(date), out datee);
             return datee;
         }
+
+        public static DateTime SaisirDateObligatoire(string date)
+        {
+            bool trying;
+            DateTime datee = DateTime.Parse("25/04/1995");
+            do
+            {
+               trying = DateTime.TryParse(PosezQuestion(date), out datee);
+            } while (!trying);
+            
+            return datee;
+        }
         static decimal SaisirDécimal(string entier)
         {
             return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
