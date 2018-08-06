@@ -16,14 +16,12 @@ namespace Contacto
     public class Contact
     {
         public string Nom { get; set; }
-        //public string Nom{ get;private set;}
         public string Prenom { get; set; }
         public string Num { get; set; }
         public string Email { get; set; }
         public DateTime Date { get; set; }
         public Contact()
         {
-
         }
         public Contact(string leNom, string lePrenom, string leNum, DateTime date, string Email)
         {
@@ -31,7 +29,7 @@ namespace Contacto
             Prenom = lePrenom;
             Num = leNum;
             this.Email = Email;
-            this.Date = date;
+            Date = date;
         }
     }
 }
