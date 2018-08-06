@@ -34,5 +34,6 @@ namespace Contacto
             this.Email = Email;
             Date = date;
 
+        }
     }
 }

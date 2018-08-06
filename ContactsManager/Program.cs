@@ -66,7 +66,7 @@ namespace ContactsManager
             LeContact.Nom = OutilsConsole.PosezQuestionObligatoire("Rentrez le nom du contact à ajouter");
             LeContact.Num = OutilsConsole.PosezQuestion("Rentrez le numéro du contact à ajouter");
             LeContact.Email = OutilsConsole.PosezQuestion("Rentrez l'émail du contact à ajouter");
-            LeContact.Date = OutilsConsole.SaisirDateObligatoire("Rentrez la date de naissance du contact à ajouter");
+            LeContact.Date = OutilsConsole.SaisirDate("Rentrez la date de naissance du contact à ajouter");
             ListContact.Add(LeContact);
             Console.Clear();
         }
