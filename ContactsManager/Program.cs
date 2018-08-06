@@ -62,11 +62,11 @@ namespace ContactsManager
         {
             Console.Clear();
             Contact LeContact = new Contact();
-            LeContact.Prenom = PosezQuestionObligatoire("Rentrez le prénom du contact à ajouter");
-            LeContact.Nom = PosezQuestionObligatoire("Rentrez le nom du contact à ajouter");
-            LeContact.Num = PosezQuestion("Rentrez le numéro du contact à ajouter");
-            LeContact.Email = PosezQuestion("Rentrez l'émail du contact à ajouter");
-            LeContact.Date = SaisirDate("Rentrez la date de naissance du contact à ajouter");
+            LeContact.Prenom = OutilsConsole.PosezQuestionObligatoire("Rentrez le prénom du contact à ajouter");
+            LeContact.Nom = OutilsConsole.PosezQuestionObligatoire("Rentrez le nom du contact à ajouter");
+            LeContact.Num = OutilsConsole.PosezQuestion("Rentrez le numéro du contact à ajouter");
+            LeContact.Email = OutilsConsole.PosezQuestion("Rentrez l'émail du contact à ajouter");
+            LeContact.Date = OutilsConsole.SaisirDate("Rentrez la date de naissance du contact à ajouter");
             ListContact.Add(LeContact);
             Console.Clear();
         }
@@ -84,7 +84,7 @@ namespace ContactsManager
         static void SupprimerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string g = PosezQuestion("Rentrez le Nom du contact à supprimer");
+            string g = OutilsConsole.PosezQuestion("Rentrez le Nom du contact à supprimer");
             foreach(Contact leContact in ListContact)
             {
                 if (g == leContact.Nom)
@@ -99,39 +99,39 @@ namespace ContactsManager
         static void ChangerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string nom = PosezQuestion("Appeler le nom du contact a changer");
+            string nom = OutilsConsole.PosezQuestion("Appeler le nom du contact a changer");
             foreach(Contact leContact in ListContact)
             {
                 if (nom == leContact.Nom)
                 {
                     Console.Clear();
-                    string choix = PosezQuestion("Quel est l'élément du Contact que vous voulez Changer?\n1- Le nom\n2- Le prenom\n3- Le numéro\n4- L'émail\n5- La date de naissance");
+                    string choix = OutilsConsole.PosezQuestion("Quel est l'élément du Contact que vous voulez Changer?\n1- Le nom\n2- Le prenom\n3- Le numéro\n4- L'émail\n5- La date de naissance");
                     switch(choix)
                     {
                         case "1":
                             Console.Clear();
-                            leContact.Nom = PosezQuestionObligatoire("Quel Nouveau Nom voulez-vous?");
+                            leContact.Nom = OutilsConsole.PosezQuestionObligatoire("Quel Nouveau Nom voulez-vous?");
                             break;
 
                         case "2":
 
                             Console.Clear();
-                            leContact.Prenom = PosezQuestionObligatoire("Quel Nouveau Prenom voulez-vous?");
+                            leContact.Prenom = OutilsConsole.PosezQuestionObligatoire("Quel Nouveau Prenom voulez-vous?");
                             break;
 
                         case "3":
                             Console.Clear();
-                            leContact.Num = PosezQuestionObligatoire("Quel Nouveau Numéro voulez-vous?");
+                            leContact.Num = OutilsConsole.PosezQuestionObligatoire("Quel Nouveau Numéro voulez-vous?");
                             break;
 
                         case "4":
                             Console.Clear();
-                            leContact.Email = PosezQuestionObligatoire("Quel Nouveau Email voulez-vous?");
+                            leContact.Email = OutilsConsole.PosezQuestionObligatoire("Quel Nouveau Email voulez-vous?");
                             break;
 
                         case "5":
                             Console.Clear();
-                            leContact.Date = SaisirDate("Quel Nouvelle Date de Naissance voulez-vous?");
+                            leContact.Date = OutilsConsole.SaisirDate("Quel Nouvelle Date de Naissance voulez-vous?");
                             break;
                         default:
                             Console.Clear();
@@ -151,43 +151,7 @@ namespace ContactsManager
         }
 
 
-        static string PosezQuestion(string question)
-        {
-            Console.WriteLine(question);
-            return(Console.ReadLine());
-        }
-        static string PosezQuestionObligatoire(string question)
-        {
-            string laQuestion = PosezQuestion(question);
-            while (string.IsNullOrWhiteSpace(laQuestion))
-            {
-                laQuestion = PosezQuestion(question);
-            }
-            return laQuestion;
-        }
-        static int SaisirInt(string entier)
-        {
-            return int.Parse(PosezQuestion(entier));
-        }
-        static double SaisirDouble(string dooble)
-        {
-            return double.Parse(PosezQuestion(dooble));
-        }
-        static bool Saisirbool(string bobol)
-        {
-            return bool.Parse(PosezQuestion(bobol));
-        }
-        static DateTime SaisirDate(string date)
-        {
-            bool trying;
-            DateTime datee = DateTime.Parse("25/04/1995");
-                trying = DateTime.TryParse(PosezQuestion(date),out datee);
-            return datee;
-        }
-        static decimal SaisirDécimal(string entier)
-        {
-            return decimal.Parse(PosezQuestion("Veuillez saisir un décimal : "));
-        }
+    
         
         
     }
