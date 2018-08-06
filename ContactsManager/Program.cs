@@ -20,12 +20,12 @@ namespace ContactsManager
                 AffichageMenu();
                 Choix = Console.ReadLine();
                 ChoixMenu(Choix,contact);          
-            } while(Choix!="4");
+            } while(Choix!="5");
         }
         static void AffichageMenu()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Quitter\n\nTapez votre choix, puis validez avec entrer:");
+            Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Changer un Contact\n5- Quitter\n\nTapez votre choix, puis validez avec entrer:");
         }
         static void ChoixMenu(string Choix,List<Contact> ListContact)
         {
@@ -44,6 +44,10 @@ namespace ContactsManager
                     break;
 
                 case "4":
+                    ChangerContact(ListContact);
+                    break;
+
+                case "5":
 
                     break;
                 default:
@@ -91,6 +95,59 @@ namespace ContactsManager
             }
             
             Console.Clear();
+        }
+        static void ChangerContact(List<Contact> ListContact)
+        {
+            Console.Clear();
+            string nom = PosezQuestion("Appeler le nom du contact a changer");
+            foreach(Contact leContact in ListContact)
+            {
+                if (nom == leContact.Nom)
+                {
+                    Console.Clear();
+                    string choix = PosezQuestion("Quel est l'élément du Contact que vous voulez Changer?\n1- Le nom\n2- Le prenom\n3- Le numéro\n4- L'émail\n5- La date de naissance");
+                    switch(choix)
+                    {
+                        case "1":
+                            Console.Clear();
+                            leContact.Nom = PosezQuestionObligatoire("Quel Nouveau Nom voulez-vous?");
+                            break;
+
+                        case "2":
+
+                            Console.Clear();
+                            leContact.Prenom = PosezQuestionObligatoire("Quel Nouveau Prenom voulez-vous?");
+                            break;
+
+                        case "3":
+                            Console.Clear();
+                            leContact.Num = PosezQuestionObligatoire("Quel Nouveau Numéro voulez-vous?");
+                            break;
+
+                        case "4":
+                            Console.Clear();
+                            leContact.Email = PosezQuestionObligatoire("Quel Nouveau Email voulez-vous?");
+                            break;
+
+                        case "5":
+                            Console.Clear();
+                            leContact.Date = SaisirDate("Quel Nouvelle Date de Naissance voulez-vous?");
+                            break;
+                        default:
+                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("Mauvais choix");
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+                    }
+                    Console.Clear();
+                    break;
+                }
+            }
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Pas de Contact correspondant à ce Nom");
+            Console.ForegroundColor = ConsoleColor.Green;
         }
 
 
