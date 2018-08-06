@@ -15,40 +15,23 @@ namespace Contacto
 
     public class Contact
     {
-        private string nom;
+        public string Nom { get; set; }
         //public string Nom{ get;private set;}
-        private string prenom;
-        private int Num;
+        public string Prenom { get; set; }
+        public string Num { get; set; }
         public string Email { get; set; }
-        private DateTime date;
-
-        public Contact(string leNom, string lePrenom, int leNum,DateTime date,string Email)
+        public DateTime Date { get; set; }
+        public Contact()
         {
-            nom = leNom;
-            prenom = lePrenom;
+
+        }
+        public Contact(string leNom, string lePrenom, string leNum, DateTime date, string Email)
+        {
+            this.Nom = leNom;
+            Prenom = lePrenom;
             Num = leNum;
             this.Email = Email;
-            this.date = date;
-        }
-
-        public DateTime GetDate()
-        {
-            return date;
-        }
-        public string Nom
-        {
-            get { return nom; }
-            private set { nom = value; }
-        }
-        public string Prenom
-        {
-            get { return prenom; }
-            private set { prenom = value; }
-        }      
-        public int Numéro
-        {
-            get { return Num; }
-            private set { Num = value; }
+            this.Date = date;
         }
     }
 }

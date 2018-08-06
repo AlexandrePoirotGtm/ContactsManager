@@ -57,15 +57,13 @@ namespace ContactsManager
         static void AjouterContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string prenom, nom, email;
-            int num;
-            DateTime date;
-            prenom = PosezQuestion("Rentrez le prénom du contact à ajouter");
-            nom = PosezQuestion("Rentrez le nom du contact à ajouter");
-            num = SaisirInt("Rentrez le numéro du contact à ajouter");
-            email = PosezQuestion("Rentrez l'émail du contact à ajouter");
-            date = SaisirDate("Rentrez la date de naissance du contact à ajouter");
-            ListContact.Add(new Contact(nom,prenom,num,date,email));
+            Contact LeContact = new Contact();
+            LeContact.Prenom = PosezQuestionObligatoire("Rentrez le prénom du contact à ajouter");
+            LeContact.Nom = PosezQuestionObligatoire("Rentrez le nom du contact à ajouter");
+            LeContact.Num = PosezQuestion("Rentrez le numéro du contact à ajouter");
+            LeContact.Email = PosezQuestion("Rentrez l'émail du contact à ajouter");
+            LeContact.Date = SaisirDate("Rentrez la date de naissance du contact à ajouter");
+            ListContact.Add(LeContact);
             Console.Clear();
         }
         static void ListerContacts(List<Contact> ListContact)
@@ -73,7 +71,7 @@ namespace ContactsManager
             Console.Clear();
             foreach (Contact LeContact in ListContact)
             {
-                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Numéro+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.GetDate());
+                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Num+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.Date.ToShortDateString());
                 Console.WriteLine("\n");
             }
             Console.ReadKey();
@@ -82,10 +80,10 @@ namespace ContactsManager
         static void SupprimerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            int g = SaisirInt("Rentrez le numéro du contact à supprimer");
+            string g = PosezQuestion("Rentrez le Nom du contact à supprimer");
             foreach(Contact leContact in ListContact)
             {
-                if (g == leContact.Numéro)
+                if (g == leContact.Nom)
                 {
                     ListContact.Remove(leContact);
                     break;
@@ -95,33 +93,21 @@ namespace ContactsManager
             Console.Clear();
         }
 
-        static int RentrezInt(string entier)
-        {
-            return(int.Parse(entier));
-        }
-        static double RentrezDouble(string dooble)
-        {
-            return (double.Parse(dooble));
-        }
-        static decimal RentrezDecimal(string DeciMal)
-        {
-            return (decimal.Parse(DeciMal));
-        }
-        static bool RentrezBool(string bobol)
-        {
-            return(bool.Parse(bobol));
-        }
-        static DateTime RentrezDate(string date)
-        {
-            return (DateTime.Parse(date));
-        }
 
         static string PosezQuestion(string question)
         {
             Console.WriteLine(question);
             return(Console.ReadLine());
         }
-
+        static string PosezQuestionObligatoire(string question)
+        {
+            string laQuestion = PosezQuestion(question);
+            while (string.IsNullOrWhiteSpace(laQuestion))
+            {
+                laQuestion = PosezQuestion(question);
+            }
+            return laQuestion;
+        }
         static int SaisirInt(string entier)
         {
             return int.Parse(PosezQuestion(entier));
@@ -136,7 +122,10 @@ namespace ContactsManager
         }
         static DateTime SaisirDate(string date)
         {
-            return DateTime.Parse(PosezQuestion(date));
+            bool trying;
+            DateTime datee = DateTime.Parse("25/04/1995");
+                trying = DateTime.TryParse(PosezQuestion(date),out datee);
+            return datee;
         }
         static decimal SaisirDécimal(string entier)
         {
