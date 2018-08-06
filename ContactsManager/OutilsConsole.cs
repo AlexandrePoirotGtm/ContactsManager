@@ -41,16 +41,16 @@ namespace ContactsManager
             trying = DateTime.TryParse(PosezQuestion(date), out datee);
             return datee;
         }
-
         public static DateTime SaisirDateObligatoire(string date)
         {
             bool trying;
             DateTime datee = DateTime.Parse("25/04/1995");
             do
             {
-               trying = DateTime.TryParse(PosezQuestion(date), out datee);
+                trying = DateTime.TryParse(PosezQuestion(date), out datee);
+                Console.ForegroundColor = ConsoleColor.Red;
             } while (!trying);
-            
+            Console.ForegroundColor = ConsoleColor.Green;
             return datee;
         }
         static decimal SaisirDécimal(string entier)
