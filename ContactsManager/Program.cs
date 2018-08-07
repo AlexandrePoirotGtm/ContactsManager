@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 using Contacto;
 namespace ContactsManager
@@ -13,14 +14,39 @@ namespace ContactsManager
 
         static void Main(string[] args)
         {
-            List<Contact> contact = new List<Contact>();
+            List<Contact> contacts = new List<Contact>();
+            var cheminFichier = @"S:\contact.txt";
+            if (File.Exists(cheminFichier))
+            {
+                IEnumerable<string> lignesFichiers = File.ReadLines(cheminFichier);
+                foreach(var  lignesFichier in lignesFichiers)
+                {
+                    string[] champs = lignesFichier.Split(';');
+                    var contact = new Contact();
+                    contact.Prenom = champs[0];
+                    contact.Nom = champs[1];
+                    contact.Num = champs[2];
+                    contact.Email = champs[3];
+                    contact.Date = DateTime.Parse(champs[4]);
+                    contacts.Add(contact);
+                }
+            }
+            else
+            {
+            }
             string Choix;
             do
             {
                 AffichageMenu();
                 Choix = Console.ReadLine();
-                ChoixMenu(Choix,contact);          
+                ChoixMenu(Choix,contacts);          
             } while(Choix!="Q" && Choix !="q");
+            var contenueFichier = new StringBuilder();
+            foreach (var contact in contacts)
+            {
+                contenueFichier.AppendLine($"{contact.Prenom};{contact.Nom};{contact.Num};{contact.Email};{contact.Date}");
+            }
+            File.WriteAllText(cheminFichier,contenueFichier.ToString());
         }
         static void AffichageMenu()
         {
