@@ -20,12 +20,12 @@ namespace ContactsManager
                 AffichageMenu();
                 Choix = Console.ReadLine();
                 ChoixMenu(Choix,contact);          
-            } while(Choix!="5");
+            } while(Choix!="Q" && Choix !="q");
         }
         static void AffichageMenu()
         {
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Changer un Contact\n5- Quitter\n\nTapez votre choix, puis validez avec entrer:");
+            Console.WriteLine("Menu\n\n1- Liste des Contacts\n2- Ajout des contacts\n3- Suppresion d'un contact\n4- Changer un Contact\n5- Trier les contacts\n6- Filtrer les contacts\nQ- Quitter\n\nTapez votre choix, puis validez avec entrer:");
         }
         static void ChoixMenu(string Choix,List<Contact> ListContact)
         {
@@ -48,8 +48,21 @@ namespace ContactsManager
                     break;
 
                 case "5":
+                    TrierContact(ListContact);
+                    break;
+
+                case ("6"):
+                    FiltrerContact(ListContact);
+                    break;
+
+                case ("Q"):
 
                     break;
+
+                case ("q"):
+
+                    break;
+
                 default:
                     Console.Clear();
                     Console.ForegroundColor = ConsoleColor.Red;
@@ -76,7 +89,7 @@ namespace ContactsManager
             foreach (Contact LeContact in ListContact)
             {
 
-                Console.WriteLine("Prenom: "+LeContact.Prenom+ "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Num+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.Date.ToShortDateString());
+                Console.WriteLine("Prenom: "+LeContact.Prenom + "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Num+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.Date.ToShortDateString());
 
                 Console.WriteLine("\n");
             }
@@ -151,8 +164,39 @@ namespace ContactsManager
             Console.WriteLine("Pas de Contact correspondant à ce Nom");
             Console.ForegroundColor = ConsoleColor.Green;
         }
+        static void TrierContact(List<Contact> ListContact)
+        {
+            Console.Clear();
+            string c = OutilsConsole.PosezQuestionObligatoire("Trier par :\n-1 Nom\n-2 Prenom");
+            var requete = from Contact in ListContact
+                          select Contact;
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Blue;
+            if (c == "1")
+            {
+                 requete = from Contact in ListContact
+                              orderby Contact.Nom ascending
+                              select Contact;
+                foreach (var Resultat in requete)
+                {
+                    Console.WriteLine("Nom:"+ Resultat.Nom+" Prenom: " + Resultat.Prenom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: "+Resultat.Date.ToShortDateString()+"\n");
+                }
+            }
+            else
+            {
+                 requete = from Contact in ListContact
+                              orderby Contact.Prenom ascending
+                              select Contact;
+                foreach (var Resultat in requete)
+                {
+                    Console.WriteLine(" Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
+                }
+            }
+        }
+        static void FiltrerContact(List<Contact> ListContact)
+        {
 
-
+        }
     
         
         
