@@ -56,9 +56,6 @@ namespace ContactsManager
                     break;
 
                 case ("Q"):
-
-                    break;
-
                 case ("q"):
 
                     break;
@@ -179,7 +176,7 @@ namespace ContactsManager
                               select Contact;
                 foreach (var Resultat in requete)
                 {
-                    Console.WriteLine("Nom:"+ Resultat.Nom+" Prenom: " + Resultat.Prenom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: "+Resultat.Date.ToShortDateString()+"\n");
+                    Console.WriteLine("Nom: "+ Resultat.Nom+" Prenom: " + Resultat.Prenom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: "+Resultat.Date.ToShortDateString()+"\n");
                 }
             }
             else
@@ -189,16 +186,26 @@ namespace ContactsManager
                               select Contact;
                 foreach (var Resultat in requete)
                 {
-                    Console.WriteLine(" Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
+                    Console.WriteLine("Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
                 }
             }
         }
         static void FiltrerContact(List<Contact> ListContact)
         {
+            Console.WriteLine("Un début de nom ou prénom?");
+            var saisie = Console.ReadLine();
+            var contactsTrouves = ListContact 
+                .Where(x => x.Prenom.StartsWith(saisie, StringComparison.OrdinalIgnoreCase)
+                            || x.Nom.StartsWith(saisie, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+            foreach (var Resultat in contactsTrouves)
+            {
+                Console.WriteLine("Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
+            }
 
+            Console.WriteLine();
+            Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
+            Console.ReadKey();
         }
-    
-        
-        
     }
 }
