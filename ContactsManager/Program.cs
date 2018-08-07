@@ -246,6 +246,8 @@ namespace ContactsManager
                     Console.WriteLine("");
                 }
             }
+            Console.ReadLine();
+            Console.Clear();
         }
         static void FiltrerContact(List<Contact> ListContact)
         {
