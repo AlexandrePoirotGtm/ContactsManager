@@ -48,6 +48,7 @@ namespace ContactsManager
             }
             File.WriteAllText(cheminFichier,contenueFichier.ToString());
         }
+
         static void AffichageMenu()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -109,23 +110,18 @@ namespace ContactsManager
         static void ListerContacts(List<Contact> ListContact)
         {
             Console.Clear();
-            foreach (Contact LeContact in ListContact)
-            {
-
-                Console.WriteLine("Prenom: "+LeContact.Prenom + "\nNom: " + LeContact.Nom + "\nNumero: " +LeContact.Num+"\nEmail: "+LeContact.Email+"\nDate de naissance: "+ LeContact.Date.ToShortDateString());
-
-                Console.WriteLine("\n");
-            }
+            AfficherListContact(ListContact);
             Console.ReadKey();
             Console.Clear();
         }
         static void SupprimerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string g = OutilsConsole.PosezQuestion("Rentrez le Nom du contact à supprimer");
+            AfficherListContact(ListContact);
+            string g = OutilsConsole.PosezQuestion("\nRentrez le Nom du contact à supprimer:");
             foreach(Contact leContact in ListContact)
             {
-                if (g == leContact.Nom)
+                if (g.ToLower() == leContact.Nom.ToLower())
                 {
                     ListContact.Remove(leContact);
                     break;
@@ -137,10 +133,11 @@ namespace ContactsManager
         static void ChangerContact(List<Contact> ListContact)
         {
             Console.Clear();
-            string nom = OutilsConsole.PosezQuestion("Appeler le nom du contact a changer");
+            AfficherListContact(ListContact);
+            string nom = OutilsConsole.PosezQuestion("\nAppeler le nom du contact a changer");
             foreach(Contact leContact in ListContact)
             {
-                if (nom == leContact.Nom)
+                if (nom.ToLower() == leContact.Nom.ToLower())
                 {
                     Console.Clear();
                     string choix = OutilsConsole.PosezQuestion("Quel est l'élément du Contact que vous voulez Changer?\n1- Le nom\n2- Le prenom\n3- Le numéro\n4- L'émail\n5- La date de naissance");
@@ -181,11 +178,15 @@ namespace ContactsManager
                     Console.Clear();
                     break;
                 }
+                else
+                {
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Pas de Contact correspondant à ce Nom");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                }
             }
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Pas de Contact correspondant à ce Nom");
-            Console.ForegroundColor = ConsoleColor.Green;
+            
         }
         static void TrierContact(List<Contact> ListContact)
         {
@@ -202,8 +203,24 @@ namespace ContactsManager
                               select Contact;
                 foreach (var Resultat in requete)
                 {
-                    Console.WriteLine("Nom: "+ Resultat.Nom+" Prenom: " + Resultat.Prenom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: "+Resultat.Date.ToShortDateString()+"\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    AfficherChamps("Nom",10);
+                    AfficherChamps("Prenom",10);
+                    AfficherChamps("Numéro",11);
+                    AfficherChamps("Email",15);
+                    AfficherChamps("Date",6);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    AfficherChamps(Resultat.Nom, 10);
+                    AfficherChamps(Resultat.Prenom, 10);
+                    AfficherChamps(Resultat.Num, 11);
+                    AfficherChamps(Resultat.Email, 15);
+                    AfficherChamps(Resultat.Date.ToString(),10);
+                    Console.WriteLine("");
+
                 }
+                Console.WriteLine("");
             }
             else
             {
@@ -212,12 +229,27 @@ namespace ContactsManager
                               select Contact;
                 foreach (var Resultat in requete)
                 {
-                    Console.WriteLine("Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    AfficherChamps("Prenom", 10);
+                    AfficherChamps("Nom", 10);
+                    AfficherChamps("Numéro", 11);
+                    AfficherChamps("Email", 15);
+                    AfficherChamps("Date", 6);
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    AfficherChamps(Resultat.Prenom, 10);
+                    AfficherChamps(Resultat.Nom, 10);
+                    AfficherChamps(Resultat.Num, 11);
+                    AfficherChamps(Resultat.Email, 15);
+                    AfficherChamps(Resultat.Date.ToString(), 10);
+                    Console.WriteLine("");
                 }
             }
         }
         static void FiltrerContact(List<Contact> ListContact)
         {
+            Console.Clear();
             Console.WriteLine("Un début de nom ou prénom?");
             var saisie = Console.ReadLine();
             var contactsTrouves = ListContact 
@@ -226,12 +258,57 @@ namespace ContactsManager
                 .ToList();
             foreach (var Resultat in contactsTrouves)
             {
-                Console.WriteLine("Prenom: " + Resultat.Prenom + " Nom: " + Resultat.Nom + " Numéro: " + Resultat.Num + " \nEmail: " + Resultat.Email + " Date de naissance: " + Resultat.Date.ToShortDateString() + "\n");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                AfficherChamps("Nom", 10);
+                AfficherChamps("Prenom", 10);
+                AfficherChamps("Numéro", 11);
+                AfficherChamps("Email", 15);
+                AfficherChamps("Date", 6);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.Green;
+                AfficherChamps(Resultat.Nom, 10);
+                AfficherChamps(Resultat.Prenom, 10);
+                AfficherChamps(Resultat.Num, 11);
+                AfficherChamps(Resultat.Email, 15);
+                AfficherChamps(Resultat.Date.ToString(), 10);
+                Console.WriteLine("");
             }
 
             Console.WriteLine();
             Console.WriteLine("\nAppuie sur une touche pour revenir au menu...");
             Console.ReadKey();
+            Console.Clear();
+        }
+        static void AfficherChamps(string leChamps,int longeur)
+        {
+            leChamps = (leChamps ?? string.Empty);
+           // Console.ForegroundColor = ConsoleColor.Blue;
+            leChamps = leChamps.Substring(0, Math.Min(leChamps.Length,longeur));
+            Console.Write($"{leChamps.PadRight(longeur)} | ");
+            //Console.ForegroundColor = ConsoleColor.Green;
+        }
+        static void AfficherListContact(List<Contact> ListContact)
+        {
+            foreach (Contact LeContact in ListContact)
+            {
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                AfficherChamps("Nom", 10);
+                AfficherChamps("Prenom", 10);
+                AfficherChamps("Numéro", 11);
+                AfficherChamps("Email", 15);
+                AfficherChamps("Date", 6);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.Green;
+                AfficherChamps(LeContact.Nom, 10);
+                AfficherChamps(LeContact.Prenom, 10);
+                AfficherChamps(LeContact.Num, 11);
+                AfficherChamps(LeContact.Email, 15);
+                AfficherChamps(LeContact.Date.ToString(), 10);
+                Console.WriteLine("");
+            }
         }
     }
 }
