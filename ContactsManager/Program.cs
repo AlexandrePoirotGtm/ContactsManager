@@ -15,7 +15,7 @@ namespace ContactsManager
         static void Main(string[] args)
         {
             List<Contact> contacts = new List<Contact>();
-            var cheminFichier = @"S:\contact.txt";
+            var cheminFichier = @"...\contact.txt";
             if (File.Exists(cheminFichier))
             {
                 IEnumerable<string> lignesFichiers = File.ReadLines(cheminFichier);
